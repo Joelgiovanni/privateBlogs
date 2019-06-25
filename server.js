@@ -9,6 +9,8 @@ app = express();
 // Secret key for the database
 db = require('./config/Keys').URI;
 
+var router = require('./routing/routes');
+
 // Connecting to the Database
 mongoose
   .connect(db, {
@@ -32,6 +34,9 @@ app.use(
 
 app.use(bodyParser.json()); ///////////////////////
 app.use(bodyParser.urlencoded({ extended: true }));
+
+// Routes / Router
+app.use('/auth', router);
 
 const port = 5000 || process.env.PORT; //HEROKU
 
