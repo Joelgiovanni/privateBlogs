@@ -1,16 +1,37 @@
 const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcrypt');
+const passport = require('passport');
 var jwt = require('jsonwebtoken');
 const keys = require('../config/Keys');
 const saltRounds = 12;
 
 const registerDate = require('../helpers/DateStamp');
+
 const User = require('../models/User');
+const Post = require('../models/Post');
 
 //Validation for the login / register routes
 const registerValidation = require('../validation/register');
 const validateLogin = require('../validation/login');
+
+router.post('/newpost', (req, res) => {
+  const newPost = new Post({
+    title: req.body.title,
+    author: req.body.author,
+    body: req.body.body,
+    date: registerDate
+  });
+  newPost
+    .save()
+    .then(
+      res.json({
+        success: true,
+        message: 'You have added a new post!'
+      })
+    )
+    .catch(err => console.log(err));
+});
 
 // @route   POST
 // @desc    Register a new user
@@ -104,5 +125,22 @@ router.post('/login', (req, res) => {
     });
   });
 });
+
+// @route   GET
+// @desc    Use Token to retrieve current User
+// @access  Private
+// URL: http://localhost:5000/auth/current
+router.get(
+  '/current',
+  passport.authenticate('jwt', { session: false }),
+  (req, res) => {
+    res.json({
+      id: req.user.id,
+      name: req.user.name,
+      email: req.user.email,
+      memberSince: req.user.memberSince
+    });
+  }
+);
 
 module.exports = router;
