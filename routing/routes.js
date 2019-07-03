@@ -92,7 +92,9 @@ router.post('/login', (req, res) => {
   // Check to see if the user is registered
   User.findOne({ email }).then(user => {
     if (!user) {
-      return res.status(400).json(errors);
+      return res
+        .status(400)
+        .json({ email: 'That email is not registered with us!' });
     }
 
     // If user is found: Check that passwords match

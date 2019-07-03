@@ -18,12 +18,17 @@ module.exports = function registerValidation(data) {
   if (Validator.isEmpty(data.password)) {
     errors.password = 'You must enter a password';
   }
+
+  if (data.password.length < 6) {
+    errors.password = 'Password must be atleast 6 characters long';
+  }
+
   if (Validator.isEmpty(data.password2)) {
-    errors.password2 = 'You must confirm the password!';
+    errors.password2 = 'You must confirm the password';
   }
 
   if (!Validator.equals(data.password, data.password2)) {
-    errors.password2 = 'Passwords must match!';
+    errors.password2 = 'Passwords must match';
   }
 
   return {

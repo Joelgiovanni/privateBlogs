@@ -11,7 +11,7 @@ module.exports = function registerLogin(data) {
     errors.email = 'You must enter a valid email to login';
   }
   if (Validator.isEmpty(data.password)) {
-    errors.password = 'You must enter a password';
+    errors.password = 'You must enter a valid password';
   }
 
   return {
