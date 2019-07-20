@@ -11,6 +11,7 @@ import Home from './components/layout/Home';
 import Login from './components/auth/Login';
 import Register from './components/auth/Register';
 import Dashboard from './components/layout/Dashboard';
+import NewPost from './components/layout/newPost';
 
 // KEEPS A USER LOGGED IN ON REFRESH && this logic will check for a valid token on every route and the token must either be manually destroyed with the logout function or the token must expire
 if (localStorage.jwtToken) {
@@ -40,6 +41,7 @@ function App() {
             <Route exact path='/login' component={Login} />
             <Route exact path='/register' component={Register} />
             <Route exact path='/dashboard' component={Dashboard} />
+            <Route exact path='/newPost' component={NewPost} />
           </Switch>
         </div>
       </Router>

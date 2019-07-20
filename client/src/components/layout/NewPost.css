@@ -1,0 +1,17 @@
+.form-heading {
+  font-family: 'Raleway', Helvetica, sans-serif;
+  font-weight: 100;
+  letter-spacing: 8px;
+  font-size: 15px;
+}
+
+@media only screen and (max-width: 768px) {
+  .new-postbtn {
+    font-size: 12px;
+  }
+}
+@media only screen and (max-width: 550px) {
+  .new-postbtn {
+    font-size: 10px;
+  }
+}

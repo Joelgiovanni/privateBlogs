@@ -8,10 +8,7 @@ const initialState = {}; // Step 2
 const store = createStore(
   rootReducer,
   initialState,
-  compose(
-    applyMiddleware(thunk),
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-  )
+  compose(applyMiddleware(thunk))
 );
 
 // Exporting the store to bring into main App.js file and be able to use across the entired app.

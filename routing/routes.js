@@ -180,7 +180,7 @@ router.post('/newPost', (req, res) => {
 // @access  Private
 // URL: http://localhost:5000/auth/loadUserPosts
 router.get('/loadUserPosts', (req, res) => {
-  const author = req.body.name;
+  const author = req.query.name;
 
   Post.find({ author: author })
     .then(posts => {
@@ -201,9 +201,9 @@ router.get('/loadUserPosts', (req, res) => {
 // @access  Private
 // URL: http://localhost:5000/auth/loadUserPosts
 router.delete('/deletePost', (req, res) => {
-  const { id } = req.body;
+  const id = req.query.id;
 
-  Post.findByIdAndDelete(ObjectId(req.body.id))
+  Post.findByIdAndDelete(ObjectId(req.query.id))
     .then(post => {
       if (post) {
         res.json({

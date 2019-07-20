@@ -30,6 +30,9 @@ class Nav extends Component {
     const loggedIn = (
       <ul>
         <li className='link'>
+          <Link className='mr-5' to='/dashboard'>
+            My Blog
+          </Link>
           <Link onClick={this.logout} to='/register'>
             Logout
           </Link>
