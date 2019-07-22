@@ -28,7 +28,7 @@ class newPost extends Component {
     };
 
     axios
-      .post('http://localhost:5000/auth/newPost', postData)
+      .post('/auth/newPost', postData)
       .then(res => {
         this.props.history.push('/dashboard');
       })

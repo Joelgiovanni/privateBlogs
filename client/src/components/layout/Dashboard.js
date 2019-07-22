@@ -25,7 +25,7 @@ class Dashboard extends Component {
 
   fetchPosts = e => {
     axios
-      .get('http://localhost:5000/auth/loadUserPosts', {
+      .get('/auth/loadUserPosts', {
         params: {
           name: this.props.auth.user.name
         }
@@ -40,7 +40,7 @@ class Dashboard extends Component {
 
   deletePost = id => {
     axios
-      .delete('http://localhost:5000/auth/deletePost', {
+      .delete('/auth/deletePost', {
         params: {
           id
         }

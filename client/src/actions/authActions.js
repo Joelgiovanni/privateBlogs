@@ -7,7 +7,7 @@ import { GET_ERRORS, SET_CURRENT_USER } from './types';
 // Register a user
 export const registerUser = (userData, history) => dispatch => {
   axios
-    .post('http://localhost:5000/auth/register', userData)
+    .post('/auth/register', userData)
     .then(res => history.push('/login'))
     .catch(err =>
       dispatch({
@@ -20,7 +20,7 @@ export const registerUser = (userData, history) => dispatch => {
 // Login and get token
 export const loginUser = userData => dispatch => {
   axios
-    .post('http://localhost:5000/auth/login', userData)
+    .post('/auth/login', userData)
     .then(res => {
       // Save token to lcocal storage
       const { token } = res.data;
