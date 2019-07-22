@@ -7,7 +7,13 @@ const cors = require('cors');
 // Initialize app()
 app = express();
 
-app.use('/', express.static(path.join(__dirname, 'client/build')));
+/*Adds the react production build to serve react requests*/
+app.use(express.static(path.join(__dirname, '/client/build')));
+
+/*React root*/
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname + '/client/build/index.html'));
+});
 
 // Secret key for the database
 db = require('./config/Keys').URI;
