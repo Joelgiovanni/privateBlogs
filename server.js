@@ -47,7 +47,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/auth', router);
 
 if (process.env.NODE_ENV === 'production') {
-  app.use(express.static('client/build'));
+  // app.use(express.static('client/build'));
+  app.use('/', express.static(path.join(__dirname, 'client/build')));
 }
 
 const port = 5000 || process.env.PORT; //HEROKU
