@@ -7,6 +7,8 @@ const cors = require('cors');
 // Initialize app()
 app = express();
 
+app.use('/', express.static(path.join(__dirname, 'client/build')));
+
 // Secret key for the database
 db = require('./config/Keys').URI;
 
@@ -45,11 +47,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // Routes / Router
 app.use('/auth', router);
-
-if (process.env.NODE_ENV === 'production') {
-  // app.use(express.static('client/build'));
-  app.use('/', express.static(path.join(__dirname, 'client/build')));
-}
 
 const port = 5000 || process.env.PORT; //HEROKU
 
