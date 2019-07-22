@@ -14,7 +14,7 @@ var router = require('./routing/routes');
 
 // Connecting to the Database
 mongoose
-  .connect(db, {
+  .connect(process.env.MONGODB_URI || db, {
     useNewUrlParser: true,
     // sets how many times to try reconnecting
     reconnectTries: Number.MAX_VALUE,
@@ -33,6 +33,8 @@ app.use(
   })
 );
 
+// Add the react production build to serve react requests
+
 // Passport middleware
 app.use(passport.initialize());
 // Passport config
@@ -43,6 +45,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // Routes / Router
 app.use('/auth', router);
+
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static('client/build'));
+}
 
 const port = 5000 || process.env.PORT; //HEROKU
 
