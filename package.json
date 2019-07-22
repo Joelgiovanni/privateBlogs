@@ -1,6 +1,9 @@
 {
   "name": "privateblog",
   "version": "1.0.0",
+  "engines": {
+    "node": "11.3.0"
+  },
   "description": "",
   "main": "server.js",
   "scripts": {
