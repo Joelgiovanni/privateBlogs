@@ -3,17 +3,10 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const passport = require('passport');
 const cors = require('cors');
+var path = require('path');
 
 // Initialize app()
 app = express();
-
-/*Adds the react production build to serve react requests*/
-app.use(express.static(path.join(__dirname, '/client/build')));
-
-/*React root*/
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname + '/client/build/index.html'));
-});
 
 // Secret key for the database
 db = require('./config/Keys').URI;
@@ -22,7 +15,7 @@ var router = require('./routing/routes');
 
 // Connecting to the Database
 mongoose
-  .connect(process.env.MONGODB_URI || db, {
+  .connect(db, {
     useNewUrlParser: true,
     // sets how many times to try reconnecting
     reconnectTries: Number.MAX_VALUE,
@@ -31,15 +24,6 @@ mongoose
   })
   .then(() => console.log('Mlab is connected'))
   .catch(err => console.log(err));
-
-// Cors set up for cross Domain requests
-app.use(
-  cors({
-    origin: ['http://localhost:3000'],
-    methods: ['GET', 'POST', 'DELETE'],
-    credentials: true // enable set cookie
-  })
-);
 
 // Add the react production build to serve react requests
 
@@ -51,8 +35,25 @@ require('./passport/passport')(passport);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+// Cors set up for cross Domain requests
+app.use(
+  cors({
+    origin: ['http://localhost:3000'],
+    methods: ['GET', 'POST', 'DELETE'],
+    credentials: true // enable set cookie
+  })
+);
+
 // Routes / Router
 app.use('/auth', router);
+
+/*Adds the react production build to serve react requests*/
+app.use(express.static(path.join(__dirname, '/client/build')));
+
+/*React root*/
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname + '/client/build/index.html'));
+});
 
 const port = 5000 || process.env.PORT; //HEROKU
 
