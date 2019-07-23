@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const passport = require('passport');
 const cors = require('cors');
 var path = require('path');
+const history = require('connect-history-api-fallback');
 require('dotenv').config();
 
 // Initialize app()
@@ -50,6 +51,8 @@ app.use('/auth', router);
 
 /*Adds the react production build to serve react requests*/
 app.use(express.static(path.join(__dirname, 'client/build')));
+
+app.use(history());
 
 const port = process.env.PORT || 5000;
 
