@@ -2,6 +2,15 @@
   font-weight: 100;
 }
 
-.link {
-  font-size: 18px;
+@media only screen and (max-width: 481px) {
+  .link {
+    font-size: 12px;
+    margin-left: 25px;
+  }
+}
+@media only screen and (max-width: 400px) {
+  .link {
+    font-size: 9px;
+    margin-left: 0;
+  }
 }

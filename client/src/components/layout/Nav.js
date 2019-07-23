@@ -17,7 +17,7 @@ class Nav extends Component {
     const { isAuthenticated } = this.props.auth;
 
     const notLoggedIn = (
-      <ul>
+      <ul className='navigation-links'>
         <li className='link'>
           <Link to='/login'>Login</Link>
         </li>
@@ -28,11 +28,11 @@ class Nav extends Component {
     );
 
     const loggedIn = (
-      <ul>
+      <ul className='navigation-links'>
         <li className='link'>
-          <Link className='mr-5' to='/dashboard'>
-            My Blog
-          </Link>
+          <Link to='/dashboard'> MyBlog </Link>
+        </li>
+        <li className='link'>
           <Link onClick={this.logout} to='/register'>
             Logout
           </Link>
